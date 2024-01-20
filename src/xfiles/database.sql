@@ -172,7 +172,6 @@ CREATE TABLE liquidacionesEncargada(
     desdeFechaLiquidado VARCHAR(30),
     desdeHoraLiquidado VARCHAR(30),
     encargada VARCHAR(30),
-    formaPago VARCHAR(500),
     hastaFechaLiquidado VARCHAR(30),
     hastaHoraLiquidado VARCHAR(30),
     createdDate VARCHAR(40),
