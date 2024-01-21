@@ -53,7 +53,7 @@ exports.getByEncargada = (req, res) => {
 
 // Delete
 
-exports.deleteLiquidationManager = (req, res) => {
+exports.deleteClosing = (req, res) => {
   const ID = req.params.id;
 
   const sql = "DELETE FROM cierre WHERE id = ?";
