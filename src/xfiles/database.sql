@@ -128,6 +128,7 @@ DESCRIBE servicio;
 CREATE TABLE cierre(
     bizum INT(50),
     currentDate VARCHAR(100),
+    createdDate VARCHAR(40) NOT NULL,
     efectivo INT(50),
     encargada VARCHAR(30),
     fechaDesde VARCHAR(30),
@@ -136,6 +137,7 @@ CREATE TABLE cierre(
     horaHasta VARCHAR(30),
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idCierre VARCHAR(100),
+    idUnico VARCHAR(100),
     tarjeta INT(50),
     total INT(50),
     transaccion INT(50),
@@ -146,7 +148,7 @@ DESCRIBE cierre;
 
 -- Liquidacion Terapeuta
 CREATE TABLE liquidacionesTerapeuta(
-    createdDate VARCHAR(40),
+    createdDate VARCHAR(40) NOT NULL,
     currentDate VARCHAR(100),    
     desdeFechaLiquidado VARCHAR(30),
     desdeHoraLiquidado VARCHAR(30),
@@ -174,7 +176,7 @@ CREATE TABLE liquidacionesEncargada(
     encargada VARCHAR(30),
     hastaFechaLiquidado VARCHAR(30),
     hastaHoraLiquidado VARCHAR(30),
-    createdDate VARCHAR(40),
+    createdDate VARCHAR(40) NOT NULL,
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idUnico VARCHAR(100),
     idEncargada VARCHAR(100),
