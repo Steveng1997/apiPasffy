@@ -127,8 +127,8 @@ DESCRIBE servicio;
 -- Cierre
 CREATE TABLE cierre(
     bizum INT(50),
-    currentDate VARCHAR(100),
     createdDate VARCHAR(40) NOT NULL,
+    currentDate VARCHAR(100),    
     efectivo INT(50),
     encargada VARCHAR(30),
     fechaDesde VARCHAR(30),
