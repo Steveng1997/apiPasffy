@@ -37,3 +37,28 @@ exports.getIdCierre = (req, res) => {
   });
 };
 
+exports.getByEncargada = (req, res) => {
+  const { encargada } = req.params;
+
+  const sql = "SELECT * FROM cierre WHERE encargada = ? ORDER BY id desc";
+
+  pool.query(sql, [encargada], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+// Delete
+
+exports.deleteLiquidationManager = (req, res) => {
+  const ID = req.params.id;
+
+  const sql = "DELETE FROM cierre WHERE id = ?";
+
+  pool.query(sql, ID, (err, result, fields) => {
+    res.json({ message: "The closing was deleted" });
+  });
+};
