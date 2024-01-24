@@ -58,6 +58,7 @@ module.exports = () => {
     routerServicio.get('/getManagerAndDate/:encargada/:fechaHoyInicio', servicioController.getManagerAndDates);
     routerServicio.get('/getTherapistConsultManagerAndDate/:encargada/:fechaHoyInicio', servicioController.getTherapistConsultingManagerAndDate);
     routerServicio.get('/getTherapistAndManagerAndDate/:terapeuta/:encargada/:fechaHoyInicio', servicioController.getTherapistAndManagerAndDates);
+    routerServicio.get('/getEncargadaClosing/:encargada', servicioController.getByEncargadaClosing);
     routerServicio.get('/getClosingByFalse', servicioController.getByClosingFalse);
     routerServicio.get('/getManagerFechaHoraInicioFechaHoraFinClosing', servicioController.getByManagerFechaHoraInicioFechaHoraFinClosing);  
     
