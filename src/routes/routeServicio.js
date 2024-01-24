@@ -57,7 +57,8 @@ module.exports = () => {
     routerServicio.get('/getTherapistAndDate/:terapeuta/:fechaHoyInicio', servicioController.getTherapistAndDates);
     routerServicio.get('/getManagerAndDate/:encargada/:fechaHoyInicio', servicioController.getManagerAndDates);
     routerServicio.get('/getTherapistConsultManagerAndDate/:encargada/:fechaHoyInicio', servicioController.getTherapistConsultingManagerAndDate);
-    routerServicio.get('/getTherapistAndManagerAndDate/:terapeuta/:encargada/:fechaHoyInicio', servicioController.getTherapistAndManagerAndDates);    
+    routerServicio.get('/getTherapistAndManagerAndDate/:terapeuta/:encargada/:fechaHoyInicio', servicioController.getTherapistAndManagerAndDates);
+    routerServicio.get('/getManagerFechaHoraInicioFechaHoraFinClosing', servicioController.getByManagerFechaHoraInicioFechaHoraFinClosing);  
     
     // Insert
     routerServicio.post('/registerServicio', servicioController.create);
