@@ -791,6 +791,19 @@ exports.getTherapistAndManagerAndDates = (req, res) => {
   });
 };
 
+exports.getByClosingFalse = (req, res) => {
+  const sql =
+    'SELECT * FROM servicio WHERE cierre = "0" ORDER BY currentDate desc';
+
+  pool.query(sql, (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 exports.getByManagerFechaHoraInicioFechaHoraFinClosing = (req, res) => {
   const { encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
 
