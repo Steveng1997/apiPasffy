@@ -15,6 +15,7 @@ module.exports = () => {
     routerServicio.get('/getServicios', servicioController.getServicio);
     routerServicio.get('/getManagerOrderCurrentDate/:encargada', servicioController.getManagerOrderCurrenDate);
     routerServicio.get('/getByLiquidacionTerapeutaFalse', servicioController.getByLiquidTerapFalse);
+    routerServicio.get('/getByLiquidacionManagerFalse', servicioController.getByLiquidaManagerFalse);    
     routerServicio.get('/getIdTerapeuta/:idTerapeuta', servicioController.getByIdTerap);
     routerServicio.get('/getIdCierre/:idCierre', servicioController.getByIdCierre);
     routerServicio.get('/getIdEncargada/:idEncargada', servicioController.getByIdEncarg);

@@ -121,6 +121,21 @@ exports.getByLiquidTerapFalse = (req, res) => {
   });
 };
 
+exports.getByLiquidaManagerFalse = (req, res) => {
+  const { encargada } = req.params;
+
+  const sql =
+    'SELECT * FROM servicio WHERE liquidadoEncargada = "0" ORDER BY currentDate desc';
+
+  pool.query(sql, [encargada], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 exports.getByIdTerap = (req, res) => {
   const { idTerapeuta } = req.params;
 

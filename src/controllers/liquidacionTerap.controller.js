@@ -81,6 +81,27 @@ exports.getByTherapist = (req, res) => {
   });
 };
 
+exports.getByManagerFechaHoraInicioFechaHoraFinClosing = (req, res) => {
+  const { encargada, desdeHoraLiquidado, hastaHoraLiquidado, desdeFechaLiquidado, hastaFechaLiquidado } = req.query;
+
+  const sql = `	SELECT * FROM liquidacionesTerapeuta WHERE encargada = ? 
+    AND STR_TO_DATE(CONCAT(desdeFechaLiquidado,' ',desdeHoraLiquidado),'%e-%m-%y %H:%i') >= ?
+    AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') <= ?
+    AND cierre = "0" ORDER BY id desc`;
+
+  pool.query(
+    sql,
+    [encargada, `${desdeFechaLiquidado} ${desdeHoraLiquidado}`, `${hastaFechaLiquidado} ${hastaHoraLiquidado}`],
+    (err, result, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200).json(result);
+    }
+  );
+};
+
 // Actualizamos
 
 exports.update = (req, res) => {
