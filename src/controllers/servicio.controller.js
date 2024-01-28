@@ -840,7 +840,7 @@ exports.getWithDistinctByManagerFechaHoraInicioFechaHoraFinClosing = (req, res) 
   const sql = `SELECT DISTINCT terapeuta FROM servicio WHERE encargada = ? 
     AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
     AND STR_TO_DATE(CONCAT(fechaFin,' ',horaEnd),'%e-%m-%y %H:%i') <= ?
-    AND cierre = "0" ORDER BY id desc`;
+    AND cierre = "0" AND liquidadoTerapeuta = "1" ORDER BY id desc`;
 
   pool.query(
     sql,
@@ -861,7 +861,7 @@ exports.getByManagerFechaHoraInicioFechaHoraFinClosing = (req, res) => {
   const sql = `	SELECT * FROM servicio WHERE encargada = ? 
     AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
     AND STR_TO_DATE(CONCAT(fechaFin,' ',horaEnd),'%e-%m-%y %H:%i') <= ?
-    AND cierre = "0" ORDER BY id desc`;
+    AND cierre = "0" AND liquidadoTerapeuta = "1" ORDER BY id desc`;
 
   pool.query(
     sql,
