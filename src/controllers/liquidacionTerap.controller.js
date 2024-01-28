@@ -82,7 +82,7 @@ exports.getByTherapist = (req, res) => {
 };
 
 exports.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res) => {
-  const { encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
+  const { encargada, desdeHoraLiquidado, hastaHoraLiquidado, desdeFechaLiquidado, hastaFechaLiquidado } = req.query;
 
   const sql = `	SELECT * FROM liquidacionesTerapeuta WHERE encargada = ?
     AND STR_TO_DATE(CONCAT(desdeFechaLiquidado,' ',desdeHoraLiquidado),'%e-%m-%y %H:%i') >= ?
@@ -91,7 +91,7 @@ exports.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res)
 
   pool.query(
     sql,
-    [encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`],
+    [encargada, `${desdeFechaLiquidado} ${desdeHoraLiquidado}`, `${hastaFechaLiquidado} ${hastaHoraLiquidado}`],
     (err, result, fields) => {
       if (err) {
         throw err;
