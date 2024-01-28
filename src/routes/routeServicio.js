@@ -61,6 +61,7 @@ module.exports = () => {
     routerServicio.get('/getTherapistAndManagerAndDate/:terapeuta/:encargada/:fechaHoyInicio', servicioController.getTherapistAndManagerAndDates);
     routerServicio.get('/getEncargadaClosing/:encargada', servicioController.getByEncargadaClosing);
     routerServicio.get('/getClosingByFalse', servicioController.getByClosingFalse);
+    routerServicio.get('/getDistinctManagerFechaHoraInicioFechaHoraFinClosing', servicioController.getWithDistinctByManagerFechaHoraInicioFechaHoraFinClosing);  
     routerServicio.get('/getManagerFechaHoraInicioFechaHoraFinClosing', servicioController.getByManagerFechaHoraInicioFechaHoraFinClosing);  
     
     // Insert

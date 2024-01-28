@@ -834,6 +834,27 @@ exports.getByClosingFalse = (req, res) => {
   });
 };
 
+exports.getWithDistinctByManagerFechaHoraInicioFechaHoraFinClosing = (req, res) => {
+  const { encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
+
+  const sql = `SELECT DISTINCT terapeuta FROM servicio WHERE encargada = ? 
+    AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
+    AND STR_TO_DATE(CONCAT(fechaFin,' ',horaEnd),'%e-%m-%y %H:%i') <= ?
+    AND cierre = "0" ORDER BY id desc`;
+
+  pool.query(
+    sql,
+    [encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`],
+    (err, result, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200).json(result);
+    }
+  );
+};
+
 exports.getByManagerFechaHoraInicioFechaHoraFinClosing = (req, res) => {
   const { encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
 
