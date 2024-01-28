@@ -11,6 +11,7 @@ module.exports = () => {
     routerLiqTerap.get('/getTerapeutaAndEncargada', liquidacionTerapController.getByTerapeutaAndEncargada);
     routerLiqTerap.get('/getEncargada/:encargada', liquidacionTerapController.getByEncargada);
     routerLiqTerap.get('/getTherapist/:terapeuta', liquidacionTerapController.getByTherapist);
+    routerLiqTerap.get('/getManagerFechaHoraInicioFechaHoraFinLiquidationTherapist', liquidacionTerapController.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist);
 
     // Insertar
     routerLiqTerap.post('/registerLiqTerap', liquidacionTerapController.create);
