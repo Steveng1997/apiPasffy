@@ -5,12 +5,12 @@ const cierreController = require('../controllers/cierre.controller');
 
 module.exports = () => {
 
-    // Consultar
+    // Get
     routerCierre.get('/getByAllCierre', cierreController.getAllCierre);
     routerCierre.get('/getByIdCierre/:idCierre', cierreController.getIdCierre);
     routerCierre.get('/getEncargada/:encargada', cierreController.getByEncargada);
 
-    // Insertar
+    // Insert
     routerCierre.post('/registerCierre', cierreController.create);
 
     // Delete

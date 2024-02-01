@@ -1,6 +1,6 @@
 const pool = require("../config/conexion");
 
-// Insertamos
+// Insert
 
 exports.create = (req, res) => {
   const sql = "INSERT INTO cierre SET ?";
@@ -10,10 +10,10 @@ exports.create = (req, res) => {
   });
 };
 
-// Consultamos
+// Get
 
 exports.getAllCierre = (req, res) => {
-  const sql = "SELECT * FROM cierre ORDER BY currentDate desc";
+  const sql = "SELECT * FROM cierre ORDER BY id desc";
 
   pool.query(sql, (err, result, fields) => {
     if (err) {
