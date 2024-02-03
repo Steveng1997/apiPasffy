@@ -150,6 +150,20 @@ exports.getByIdTerap = (req, res) => {
   });
 };
 
+exports.getByIdCierreDistinct = (req, res) => {
+  const { idCierre } = req.params;
+
+  const sql = "SELECT DISTINCT terapeuta FROM servicio WHERE idCierre = ?";
+
+  pool.query(sql, [idCierre], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 exports.getByIdCierre = (req, res) => {
   const { idCierre } = req.params;
 
