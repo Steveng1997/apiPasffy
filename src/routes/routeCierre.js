@@ -14,7 +14,7 @@ module.exports = () => {
     routerCierre.post('/registerCierre', cierreController.create);
 
     // Delete
-    routerCierre.delete('/deleteLiquidationTherapists/:id', cierreController.deleteClosing);
+    routerCierre.delete('/deleteClosing/:id', cierreController.deleteClosing);
 
     return routerCierre;
 }

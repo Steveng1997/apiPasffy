@@ -1106,6 +1106,16 @@ exports.updateManagerSettlementManagerIdByManagerId = (req, res) => {
   });
 };
 
+exports.updateClosingByIdClosing = (req, res) => {
+  const { idCierre } = req.params;
+
+  const sql = "UPDATE servicio SET cierre = '0', idCierre = '' WHERE idCierre = ?";
+
+  pool.query(sql, [idCierre], () => {
+    res.json({ message: "The servicio was Updated" });
+  });
+};
+
 exports.updateValuePisos = (req, res) => {
   const id = req.params.id;
   const { pantalla } = req.params;
