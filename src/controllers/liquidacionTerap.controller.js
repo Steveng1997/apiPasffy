@@ -81,17 +81,38 @@ exports.getByTherapist = (req, res) => {
   });
 };
 
-exports.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res) => {
-  const { encargada, desdeHoraLiquidado, hastaHoraLiquidado, desdeFechaLiquidado, hastaFechaLiquidado } = req.query;
+exports.getWithDistinctByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res) => {
+  const { encargada, hastaHoraLiquidado1, hastaHoraLiquidado2, hastaFechaLiquidado1, hastaFechaLiquidado2 } = req.query;
 
-  const sql = `	SELECT * FROM liquidacionesTerapeuta WHERE encargada = ?
-    AND STR_TO_DATE(CONCAT(desdeFechaLiquidado,' ',desdeHoraLiquidado),'%e-%m-%y %H:%i') >= ?
+  const sql = `SELECT DISTINCT terapeuta FROM liquidacionesTerapeuta WHERE encargada = ?
+    AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') >= ?
     AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') <= ?
     ORDER BY id desc`;
 
   pool.query(
     sql,
-    [encargada, `${desdeFechaLiquidado} ${desdeHoraLiquidado}`, `${hastaFechaLiquidado} ${hastaHoraLiquidado}`],
+    [encargada, `${hastaFechaLiquidado1} ${hastaHoraLiquidado1}`, `${hastaFechaLiquidado2} ${hastaHoraLiquidado2}`],
+    (err, result, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200).json(result);
+    }
+  );
+};
+
+exports.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res) => {
+  const { encargada, hastaHoraLiquidado1, hastaHoraLiquidado2, hastaFechaLiquidado1, hastaFechaLiquidado2 } = req.query;
+
+  const sql = `	SELECT * FROM liquidacionesTerapeuta WHERE encargada = ?
+    AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') >= ?
+    AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') <= ?
+    ORDER BY id desc`;
+
+  pool.query(
+    sql,
+    [encargada, `${hastaFechaLiquidado1} ${hastaHoraLiquidado1}`, `${hastaFechaLiquidado2} ${hastaHoraLiquidado2}`],
     (err, result, fields) => {
       if (err) {
         throw err;
