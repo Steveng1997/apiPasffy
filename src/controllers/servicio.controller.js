@@ -974,6 +974,48 @@ exports.getByTherapistAndManagerFechaHoraInicioFechaHoraFinClosingTrue = (req, r
   );
 };
 
+exports.getByTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosing = (req, res) => {
+  const { terapeuta, encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
+
+  const sql = `	SELECT * FROM servicio WHERE terapeuta = ? AND encargada = ? 
+    AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
+    AND STR_TO_DATE(CONCAT(fechaFin,' ',horaEnd),'%e-%m-%y %H:%i') <= ?
+    AND cierre = "0" AND numberTerap != "0" ORDER BY id desc`;
+
+  pool.query(
+    sql,
+    [terapeuta, encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`],
+    (err, result, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200).json(result);
+    }
+  );
+};
+
+exports.getByTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosingTrue = (req, res) => {
+  const { terapeuta, encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
+
+  const sql = `	SELECT * FROM servicio WHERE terapeuta = ? AND encargada = ? 
+    AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
+    AND STR_TO_DATE(CONCAT(fechaFin,' ',horaEnd),'%e-%m-%y %H:%i') <= ?
+    AND cierre = "1" AND numberTerap != "0" ORDER BY id desc`;
+
+  pool.query(
+    sql,
+    [terapeuta, encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`],
+    (err, result, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200).json(result);
+    }
+  );
+};
+
 // Update
 
 exports.updateServicio = (req, res) => {
