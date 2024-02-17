@@ -174,6 +174,7 @@ CREATE TABLE liquidacionesEncargada(
     desdeFechaLiquidado VARCHAR(30),
     desdeHoraLiquidado VARCHAR(30),
     encargada VARCHAR(30),
+    fixedDay INT(10),
     hastaFechaLiquidado VARCHAR(30),
     hastaHoraLiquidado VARCHAR(30),
     createdDate VARCHAR(40) NOT NULL,
