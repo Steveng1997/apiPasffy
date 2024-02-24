@@ -123,6 +123,27 @@ exports.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res)
   );
 };
 
+exports.getByManagerAndTherapistFechaHoraInicioFechaHoraFinLiquidationTherapist = (req, res) => {
+  const { encargada, terapeuta, hastaHoraLiquidado1, hastaHoraLiquidado2, hastaFechaLiquidado1, hastaFechaLiquidado2 } = req.query;
+
+  const sql = `	SELECT * FROM liquidacionesTerapeuta WHERE encargada = ? AND terapeuta = ?
+    AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') >= ?
+    AND STR_TO_DATE(CONCAT(hastaFechaLiquidado,' ',hastaHoraLiquidado),'%e-%m-%y %H:%i') <= ?
+    ORDER BY id desc`;
+
+  pool.query(
+    sql,
+    [encargada, terapeuta, `${hastaFechaLiquidado1} ${hastaHoraLiquidado1}`, `${hastaFechaLiquidado2} ${hastaHoraLiquidado2}`],
+    (err, result, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200).json(result);
+    }
+  );
+};
+
 // Actualizamos
 
 exports.update = (req, res) => {
