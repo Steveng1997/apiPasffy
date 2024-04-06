@@ -11,6 +11,7 @@ module.exports = () => {
     routerEncargada.get('/usuarioEncargada/:usuario', encargadaController.getByUsuario);
     routerEncargada.get('/nombreEncargada/:nombre', encargadaController.getByNombre);
     routerEncargada.get('/usuarioAndpass', encargadaController.getUsuarioAndPass);
+    routerEncargada.get('/usuarioAndpassword', encargadaController.getUsuarioAndPassword);
     routerEncargada.get('/listaEncargada', encargadaController.getEncargadas);
 
     routerEncargada.post('/test', verifyToken, (req, res) => {

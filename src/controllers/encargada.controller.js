@@ -89,6 +89,20 @@ exports.getUsuarioAndPass = (req, res) => {
   })
 }
 
+exports.getUsuarioAndPassword = (req, res) => {
+  const { usuario, pass } = req.query;
+
+  const sql = "SELECT * FROM encargada WHERE usuario = ? AND pass = ?";
+
+  pool.query(sql, [usuario, pass], (err, result, fields) => {
+       if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  })
+}
+
 exports.getEncargadas = (req, res) => {
   const sql = "SELECT * FROM encargada ORDER BY id asc";
 
