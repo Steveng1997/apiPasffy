@@ -160,10 +160,8 @@ CREATE TABLE liquidacionesTerapeuta(
     idUnico VARCHAR(100),
     idTerapeuta VARCHAR(100),
     importe INT(50),
-    regularizacion varchar(250),
     terapeuta VARCHAR(30),
     tratamiento INT(50)
-    valueRegularizacion INT(10),
 );
 
 DESCRIBE liquidacionesTerapeuta;
@@ -182,7 +180,6 @@ CREATE TABLE liquidacionesEncargada(
     idUnico VARCHAR(100),
     idEncargada VARCHAR(100),
     importe INT(50),
-    regularizacion varchar(250),
     tratamiento INT(50)
 );
 
