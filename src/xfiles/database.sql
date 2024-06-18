@@ -88,8 +88,8 @@ CREATE TABLE servicio(
     numberPiso1 INT(50),
     numberPiso2 INT(50),
     numberTerap INT(50),
-    taxista INT(50),
-    taxi INT (50),
+    otros INT(50),
+    pantalla VARCHAR(100),
     propina INT(50),
     salida VARCHAR(50),
     servicio INT(50),
@@ -99,6 +99,7 @@ CREATE TABLE servicio(
     tarjPiso1 BOOLEAN,
     tarjPiso2 BOOLEAN,
     tarjTerap BOOLEAN,
+    taxi INT (50),
     terapeuta VARCHAR(30),
     totalServicio INT(50),
     transEncarg BOOLEAN,
@@ -134,13 +135,13 @@ DESCRIBE servicio;
 -- Cierre
 CREATE TABLE cierre(
     bizum INT(50),
-    createdDate VARCHAR(40) NOT NULL,
     currentDate VARCHAR(100),
+    createdDate VARCHAR(40) NOT NULL,
     efectivo INT(50),
     encargada VARCHAR(30),
     desdeFecha VARCHAR(30),
-    hastaFecha VARCHAR(30),
     desdeHora VARCHAR(30),
+    hastaFecha VARCHAR(30),
     hastaHora VARCHAR(30),
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idCierre VARCHAR(100),
@@ -155,6 +156,7 @@ DESCRIBE cierre;
 
 -- Liquidacion Terapeuta
 CREATE TABLE liquidacionesTerapeuta(
+    company VARCHAR(100),
     createdDate VARCHAR(40) NOT NULL,
     currentDate VARCHAR(100),
     desdeFechaLiquidado VARCHAR(30),
@@ -175,6 +177,7 @@ DESCRIBE liquidacionesTerapeuta;
 
 -- Liquidacion Encargada
 CREATE TABLE liquidacionesEncargada(
+    company VARCHAR(100),
     currentDate VARCHAR(100),
     desdeFechaLiquidado VARCHAR(30),
     desdeHoraLiquidado VARCHAR(30),
