@@ -75,6 +75,34 @@ exports.orderByMinutes = (req, res) => {
   });
 };
 
+exports.getByCompany = (req, res) => {
+  const { company } = req.params;
+
+  const sql = "SELECT * FROM terapeuta WHERE company = ? ORDER BY id asc";
+
+  pool.query(sql, [company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+exports.orderByMinutesAndCompany = (req, res) => {
+   const { company } = req.params;
+  
+  const sql = "SELECT * FROM terapeuta WHERE company = ? ORDER BY minuto desc";
+
+  pool.query(sql, [company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 // Actualizamos
 
 exports.updateTerapeutas = (req, res) => {

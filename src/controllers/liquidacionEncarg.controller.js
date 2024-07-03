@@ -13,9 +13,10 @@ exports.create = (req, res) => {
 // Consultamos
 
 exports.getLiquidacionesEncargada = (req, res) => {
+  const { company } = req.params;
 
-  const sql = "SELECT * FROM liquidacionesEncargada ORDER BY id desc";
-  pool.query(sql, (err, result, fields) => {
+  const sql = "SELECT * FROM liquidacionesEncargada WHERE company = ? ORDER BY id desc";
+  pool.query(sql, [company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -44,6 +45,35 @@ exports.getByEncargada = (req, res) => {
   const sql = "SELECT * FROM liquidacionesEncargada WHERE encargada = ? ORDER BY id desc";
 
   pool.query(sql, [encargada], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+exports.getDateCurrentDay = (req, res) => {
+  const { createdDate, company } = req.params;
+
+  const sql = 'SELECT * FROM liquidacionesEncargada WHERE createdDate = ? AND company = ? ORDER BY currentDate desc';
+
+  pool.query(sql, [createdDate, company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+exports.getFechaHoyAndManager = (req, res) => {
+  const { createdDate, encargada, company } = req.query;
+
+  const sql =
+    "SELECT * FROM liquidacionesEncargada WHERE createdDate = ? AND encargada = ? AND company = ? ORDER BY currentDate desc";
+
+  pool.query(sql, [createdDate, encargada, company], (err, result, fields) => {
     if (err) {
       throw err;
     }

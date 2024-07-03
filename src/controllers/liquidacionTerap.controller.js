@@ -13,9 +13,11 @@ exports.create = (req, res) => {
 // Consultamos
 
 exports.getLiquidacionesTerapeuta = (req, res) => {
-  const sql = "SELECT * FROM liquidacionesTerapeuta ORDER BY id desc";
+  const { company } = req.params;
+  
+  const sql = "SELECT * FROM liquidacionesTerapeuta WHERE company = ? ORDER BY id desc";
 
-  pool.query(sql, (err, result, fields) => {
+  pool.query(sql, [company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -54,11 +56,11 @@ exports.getByTerapeutaAndEncargada = (req, res) => {
 };
 
 exports.getByEncargada = (req, res) => {
-  const { encargada } = req.params;
+  const { encargada, company } = req.params;
 
-  const sql = 'SELECT * FROM liquidacionesTerapeuta WHERE encargada = ? ORDER BY id desc';
+  const sql = 'SELECT * FROM liquidacionesTerapeuta WHERE encargada = ? AND company = ? ORDER BY id desc';
 
-  pool.query(sql, [encargada], (err, result, fields) => {
+  pool.query(sql, [encargada, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -68,11 +70,40 @@ exports.getByEncargada = (req, res) => {
 };
 
 exports.getByTherapist = (req, res) => {
-  const { terapeuta } = req.params;
+  const { terapeuta, company } = req.params;
 
-  const sql = 'SELECT * FROM liquidacionesTerapeuta WHERE terapeuta = ? ORDER BY id desc';
+  const sql = 'SELECT * FROM liquidacionesTerapeuta WHERE terapeuta = ? AND company = ? ORDER BY id desc';
 
-  pool.query(sql, [terapeuta], (err, result, fields) => {
+  pool.query(sql, [terapeuta, company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+exports.getDateCurrentDay = (req, res) => {
+  const { createdDate, company } = req.params;
+
+  const sql = 'SELECT * FROM liquidacionesTerapeuta WHERE createdDate = ? AND company = ? ORDER BY currentDate desc';
+
+  pool.query(sql, [createdDate, company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+exports.getFechaHoyAndManager = (req, res) => {
+  const { createdDate, encargada } = req.query;
+
+  const sql =
+    "SELECT * FROM liquidacionesTerapeuta WHERE createdDate = ? AND encargada = ? ORDER BY currentDate desc";
+
+  pool.query(sql, [createdDate, encargada], (err, result, fields) => {
     if (err) {
       throw err;
     }

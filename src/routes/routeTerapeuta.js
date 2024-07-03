@@ -11,6 +11,8 @@ module.exports = () => {
     routerTerapeuta.get('/getByIdAsc', terapeutaController.getAllTerapeuta);
     routerTerapeuta.get('/getByHoraEndDesc', terapeutaController.getAllTerapeutaByOrden);
     routerTerapeuta.get('/orderMinutes', terapeutaController.orderByMinutes);
+    routerTerapeuta.get('/getCompany/:company', terapeutaController.getByCompany);
+    routerTerapeuta.get('/orderMinutesAndCompany/:company', terapeutaController.orderByMinutesAndCompany);  
 
     // Insertar
     routerTerapeuta.post('/registerTerapeuta', terapeutaController.create);

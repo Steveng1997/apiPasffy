@@ -115,6 +115,35 @@ exports.getEncargadas = (req, res) => {
   });
 };
 
+exports.getIdAndCompany = (req, res) => {
+  const id = req.params.id;
+  const { company } = req.params;
+
+  const sql = "SELECT * FROM encargada WHERE id = ? AND company = ?";
+
+  pool.query(sql, [id, company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
+exports.getByCompany = (req, res) => {
+  const { company } = req.params;
+
+  const sql = "SELECT * FROM encargada WHERE company = ?";
+
+  pool.query(sql, [company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 
 // Update
 

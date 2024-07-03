@@ -47,7 +47,7 @@ module.exports = () => {
     routerServicio.get('/getByEncargFechaDesc/:encargada', servicioController.getEncargFechaDesc);
     routerServicio.get('/getByEncargadaFechaAsc/:encargada', servicioController.getEncargadaFechaAsc);
     routerServicio.get('/getByEncargadaFechaDesc/:encargada', servicioController.getEncargadaFechaDesc);
-    routerServicio.get('/getByFechaHoy/:fechaHoyInicio', servicioController.getFechaHoy);
+    routerServicio.get('/getByFechaHoy/:fechaHoyInicio/:company', servicioController.getFechaHoy);
     routerServicio.get('/getByIdDesc/:idUnico', servicioController.getIdDesc);
     routerServicio.get('/getByServicioByEncargadaAndIdUnico/:encargada', servicioController.getServicioByEncargadaAndIdUnico);
     routerServicio.get('/getByEncargadaFechaAscByCierreTrue/:encargada', servicioController.getEncargadaFechaAscByCierreTrue);
@@ -56,10 +56,10 @@ module.exports = () => {
     routerServicio.get('/getEncargadaFechaHoraInicioFechaHoraFin', servicioController.getByEncargadaFechaHoraInicioFechaHoraFin);
     routerServicio.get('/getFechaHoyByManager', servicioController.getFechaHoyAndManager);
     routerServicio.get('/getPaymenForm/:formaPago', servicioController.getPaymentForm);
-    routerServicio.get('/getTherapistAndDate/:terapeuta/:fechaHoyInicio', servicioController.getTherapistAndDates);
-    routerServicio.get('/getManagerAndDate/:encargada/:fechaHoyInicio', servicioController.getManagerAndDates);
-    routerServicio.get('/getTherapistConsultManagerAndDate/:encargada/:fechaHoyInicio', servicioController.getTherapistConsultingManagerAndDate);
-    routerServicio.get('/getTherapistAndManagerAndDate/:terapeuta/:encargada/:fechaHoyInicio', servicioController.getTherapistAndManagerAndDates);
+    routerServicio.get('/getTherapistAndDate/:terapeuta/:fechaHoyInicio/:company', servicioController.getTherapistAndDates);
+    routerServicio.get('/getManagerAndDate/:encargada/:fechaHoyInicio/:company', servicioController.getManagerAndDates);
+    routerServicio.get('/getTherapistConsultManagerAndDate/:encargada/:fechaHoyInicio/:company', servicioController.getTherapistConsultingManagerAndDate);
+    routerServicio.get('/getTherapistAndManagerAndDate/:terapeuta/:encargada/:fechaHoyInicio/:company', servicioController.getTherapistAndManagerAndDates);
     routerServicio.get('/getEncargadaClosing/:encargada', servicioController.getByEncargadaClosing);
     routerServicio.get('/getClosingByFalse', servicioController.getByClosingFalse);
     routerServicio.get('/getDistinctManagerFechaHoraInicioFechaHoraFinClosing', servicioController.getWithDistinctByManagerFechaHoraInicioFechaHoraFinClosing);  
@@ -69,7 +69,7 @@ module.exports = () => {
     routerServicio.get('/getTherapistAndManagerFechaHoraInicioFechaHoraFinClosing', servicioController.getByTherapistAndManagerFechaHoraInicioFechaHoraFinClosing);  
     routerServicio.get('/getTherapistAndManagerFechaHoraInicioFechaHoraFinClosingTrue', servicioController.getByTherapistAndManagerFechaHoraInicioFechaHoraFinClosingTrue);      
     routerServicio.get('/getTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosing', servicioController.getByTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosing);  
-    routerServicio.get('/getTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosingTrue', servicioController.getByTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosingTrue);      
+    routerServicio.get('/getTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosingTrue', servicioController.getByTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosingTrue);        
     
     // Insert
     routerServicio.post('/registerServicio', servicioController.create);

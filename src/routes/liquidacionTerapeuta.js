@@ -6,11 +6,13 @@ const liquidacionTerapController = require('../controllers/liquidacionTerap.cont
 module.exports = () => {
 
     // Consultar
-    routerLiqTerap.get('/getByLiquidacionesTerapeuta', liquidacionTerapController.getLiquidacionesTerapeuta);
+    routerLiqTerap.get('/getByLiquidacionesTerapeuta/:company', liquidacionTerapController.getLiquidacionesTerapeuta);
     routerLiqTerap.get('/getByIdTerap/:idTerapeuta', liquidacionTerapController.getIdTerap);
     routerLiqTerap.get('/getTerapeutaAndEncargada', liquidacionTerapController.getByTerapeutaAndEncargada);
-    routerLiqTerap.get('/getEncargada/:encargada', liquidacionTerapController.getByEncargada);
-    routerLiqTerap.get('/getTherapist/:terapeuta', liquidacionTerapController.getByTherapist);
+    routerLiqTerap.get('/getEncargada/:encargada/:company', liquidacionTerapController.getByEncargada);
+    routerLiqTerap.get('/getTherapist/:terapeuta/:company', liquidacionTerapController.getByTherapist);
+    routerLiqTerap.get('/getDateCurrent/:createdDate/:company', liquidacionTerapController.getDateCurrentDay);
+    routerLiqTerap.get('/getFechaHoyByManager', liquidacionTerapController.getFechaHoyAndManager);
     routerLiqTerap.get('/getManagerFechaHoraInicioFechaHoraFinLiquidationTherapist', liquidacionTerapController.getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist);
     routerLiqTerap.get('/getDistinctByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist', liquidacionTerapController.getWithDistinctByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist);
 

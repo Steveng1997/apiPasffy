@@ -6,9 +6,11 @@ const liquidacionEncargController = require('../controllers/liquidacionEncarg.co
 module.exports = () => {
 
     // Consultar
-    routerLiqEncarg.get('/getByLiquidacionesEncargada', liquidacionEncargController.getLiquidacionesEncargada);
+    routerLiqEncarg.get('/getByLiquidacionesEncargada/:company', liquidacionEncargController.getLiquidacionesEncargada);
     routerLiqEncarg.get('/getByIdEncarg/:idEncargada', liquidacionEncargController.getIdEncarg);
     routerLiqEncarg.get('/getEncargada/:encargada', liquidacionEncargController.getByEncargada);
+    routerLiqEncarg.get('/getDateCurrent/:createdDate/:company', liquidacionEncargController.getDateCurrentDay);
+    routerLiqEncarg.get('/getFechaHoyByManager', liquidacionEncargController.getFechaHoyAndManager);
 
     // Insertar
     routerLiqEncarg.post('/registerLiqEncarg', liquidacionEncargController.create);

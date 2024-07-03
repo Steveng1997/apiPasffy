@@ -602,27 +602,12 @@ exports.getEncargadaFechaDesc = (req, res) => {
 };
 
 exports.getFechaHoy = (req, res) => {
-  const { fechaHoyInicio } = req.params;
+  const { fechaHoyInicio, company } = req.params;
 
   const sql =
-    "SELECT * FROM servicio WHERE fechaHoyInicio = ? ORDER BY currentDate desc";
+    "SELECT * FROM servicio WHERE fechaHoyInicio = ? and company = ? ORDER BY currentDate desc";
 
-  pool.query(sql, [fechaHoyInicio], (err, result, fields) => {
-    if (err) {
-      throw err;
-    }
-
-    res.status(200).json(result);
-  });
-};
-
-exports.getFechaHoy = (req, res) => {
-  const { fechaHoyInicio } = req.params;
-
-  const sql =
-    "SELECT * FROM servicio WHERE fechaHoyInicio = ? ORDER BY currentDate desc";
-
-  pool.query(sql, [fechaHoyInicio], (err, result, fields) => {
+  pool.query(sql, [fechaHoyInicio, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -691,16 +676,16 @@ exports.getEncargadaFechaDescByCierreFalse = (req, res) => {
 };
 
 exports.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin = (req, res) => {
-  const { terapeuta, encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
+  const { terapeuta, encargada, horaStart, horaEnd, fecha, fechaFin, company } = req.query;
 
   const sql = `	SELECT * FROM servicio WHERE terapeuta = ? AND encargada = ? 
     AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
     AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') <= ?
-    AND liquidadoTerapeuta = "0" ORDER BY id desc`;
+    AND liquidadoTerapeuta = "0" AND company = ? ORDER BY id desc`;
 
   pool.query(
     sql,
-    [terapeuta, encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`],
+    [terapeuta, encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`, company],
     (err, result, fields) => {
       if (err) {
         throw err;
@@ -712,16 +697,16 @@ exports.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin = (req, res) => {
 };
 
 exports.getByEncargadaFechaHoraInicioFechaHoraFin = (req, res) => {
-  const { encargada, horaStart, horaEnd, fecha, fechaFin } = req.query;
+  const { encargada, horaStart, horaEnd, fecha, fechaFin, company } = req.query;
 
   const sql = `	SELECT * FROM servicio WHERE encargada = ?
     AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') >= ?
     AND STR_TO_DATE(CONCAT(fecha,' ',horaStart),'%e-%m-%y %H:%i') <= ?
-    AND liquidadoEncargada = "0" ORDER BY id desc`;
+    AND liquidadoEncargada = "0" AND company = ? ORDER BY id desc`;
 
   pool.query(
     sql,
-    [encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`],
+    [encargada, `${fecha} ${horaStart}`, `${fechaFin} ${horaEnd}`, company],
     (err, result, fields) => {
       if (err) {
         throw err;
@@ -733,12 +718,12 @@ exports.getByEncargadaFechaHoraInicioFechaHoraFin = (req, res) => {
 };
 
 exports.getFechaHoyAndManager = (req, res) => {
-  const { fechaHoyInicio, encargada } = req.query;
+  const { fechaHoyInicio, encargada, company } = req.query;
 
   const sql =
-    "SELECT * FROM servicio WHERE fechaHoyInicio = ? AND encargada = ? ORDER BY currentDate desc";
+    "SELECT * FROM servicio WHERE fechaHoyInicio = ? AND encargada = ? AND company = ? ORDER BY currentDate desc";
 
-  pool.query(sql, [fechaHoyInicio, encargada], (err, result, fields) => {
+  pool.query(sql, [fechaHoyInicio, encargada, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -762,27 +747,26 @@ exports.getPaymentForm = (req, res) => {
 };
 
 exports.getTherapistAndDates = (req, res) => {
-  const { terapeuta, fechaHoyInicio } = req.params;
+  const { terapeuta, fechaHoyInicio, company } = req.params;
 
   const sql =
-    "SELECT * FROM servicio WHERE terapeuta = ? AND fechaHoyInicio = ?";
+    "SELECT * FROM servicio WHERE terapeuta = ? AND fechaHoyInicio = ? AND company = ?";
 
-  pool.query(sql, [terapeuta, fechaHoyInicio], (err, result, fields) => {
+  pool.query(sql, [terapeuta, fechaHoyInicio, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
 
-    res.status(200).json(result);
+    res.status(200).json(result);  
   });
 };
 
 exports.getManagerAndDates = (req, res) => {
-  const { encargada, fechaHoyInicio } = req.params;
+  const { encargada, fechaHoyInicio, company } = req.params;
 
-  const sql =
-    "SELECT * FROM servicio WHERE encargada = ? AND fechaHoyInicio = ?";
+  const sql = "SELECT * FROM servicio WHERE encargada = ? AND fechaHoyInicio = ? AND company = ?";
 
-  pool.query(sql, [encargada, fechaHoyInicio], (err, result, fields) => {
+  pool.query(sql, [encargada, fechaHoyInicio, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -792,11 +776,11 @@ exports.getManagerAndDates = (req, res) => {
 };
 
 exports.getTherapistConsultingManagerAndDate = (req, res) => {
-  const { encargada, fechaHoyInicio } = req.params;
+  const { encargada, fechaHoyInicio, company } = req.params;
 
-  const sql = "SELECT DISTINCT terapeuta FROM servicio WHERE encargada = ? AND fechaHoyInicio = ?";
+  const sql = "SELECT DISTINCT terapeuta FROM servicio WHERE encargada = ? AND fechaHoyInicio = ? AND company = ?";
 
-  pool.query(sql, [encargada, fechaHoyInicio], (err, result, fields) => {
+  pool.query(sql, [encargada, fechaHoyInicio, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -806,12 +790,12 @@ exports.getTherapistConsultingManagerAndDate = (req, res) => {
 };
 
 exports.getTherapistAndManagerAndDates = (req, res) => {
-  const { terapeuta, encargada, fechaHoyInicio } = req.params;
+  const { terapeuta, encargada, fechaHoyInicio, company } = req.params;
 
   const sql =
-    "SELECT * FROM servicio WHERE terapeuta = ? AND encargada = ? AND fechaHoyInicio = ?";
+    "SELECT * FROM servicio WHERE terapeuta = ? AND encargada = ? AND fechaHoyInicio = ? AND company = ?";
 
-  pool.query(sql, [terapeuta, encargada, fechaHoyInicio], (err, result, fields) => {
+  pool.query(sql, [terapeuta, encargada, fechaHoyInicio, company], (err, result, fields) => {
     if (err) {
       throw err;
     }
@@ -1260,6 +1244,17 @@ exports.updateScreenByIds = (req, res) => {
   const sql = "UPDATE servicio SET pantalla = ? WHERE id = ?";
 
   pool.query(sql, [pantalla, id], () => {
+    res.json({ message: "The servicio was Updated" });
+  });
+};
+
+exports.updateNote = (req, res) => {
+  const id = req.params.id;
+  const { nota } = req.body;
+
+  const sql = "UPDATE servicio SET nota = ? WHERE id = ?";
+
+  pool.query(sql, [nota, id], () => {
     res.json({ message: "The servicio was Updated" });
   });
 };
