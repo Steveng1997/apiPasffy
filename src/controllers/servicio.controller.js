@@ -1015,6 +1015,20 @@ exports.getByCompany = (req, res) => {
   });
 };
 
+exports.getManagerOrderCurrenDate = (req, res) => {
+  const { encargada, company } = req.params;
+
+  const sql = "SELECT * FROM servicio WHERE encargada = ? AND company = ? ORDER BY currentDate desc";
+
+  pool.query(sql, [encargada, company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 // Update
 
 exports.updateServicio = (req, res) => {
