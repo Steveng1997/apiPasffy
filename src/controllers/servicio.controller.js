@@ -1000,6 +1000,21 @@ exports.getByTherapistAndManagerNumberterapFechaHoraInicioFechaHoraFinClosingTru
   );
 };
 
+exports.getByCompany = (req, res) => {
+  const { company } = req.params;
+
+  const sql =
+    "SELECT * FROM servicio WHERE company = ? ORDER BY currentDate desc";
+
+  pool.query(sql, [company], (err, result, fields) => {
+    if (err) {
+      throw err;
+    }
+
+    res.status(200).json(result);
+  });
+};
+
 // Update
 
 exports.updateServicio = (req, res) => {
