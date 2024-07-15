@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // habilitar body-parser
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //Habiliar los cors
