@@ -1015,7 +1015,7 @@ exports.getByCompany = (req, res) => {
   });
 };
 
-exports.getManagerOrderCurrenDate = (req, res) => {
+exports.getByManagerWithCompany = (req, res) => {
   const { encargada, company } = req.params;
 
   const sql = "SELECT * FROM servicio WHERE encargada = ? AND company = ? ORDER BY currentDate desc";
